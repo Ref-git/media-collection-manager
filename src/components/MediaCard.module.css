@@ -1,0 +1,111 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border-radius: 10px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--card-border, #e5e7eb);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.audio .badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.video .badge {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.game .badge {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.publisher {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--card-border, #e5e7eb);
+}
+
+.platform {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.year {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    --card-bg: #1f2937;
+    --card-border: #374151;
+  }
+
+  .audio .badge {
+    background: #1e3a5f;
+    color: #93c5fd;
+  }
+
+  .video .badge {
+    background: #4a1942;
+    color: #f9a8d4;
+  }
+
+  .game .badge {
+    background: #14532d;
+    color: #86efac;
+  }
+
+  .publisher {
+    color: #9ca3af;
+  }
+
+  .platform {
+    color: #d1d5db;
+  }
+
+  .year {
+    color: #6b7280;
+  }
+}

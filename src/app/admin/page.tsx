@@ -1,12 +1,7 @@
+import { getMediaItems } from "@/lib/data";
+import AdminClient from "./AdminClient";
 
-
-export default function Home() {
-  return (
-    <div >
-<h1>
-    ADMIN PAGE
-</h1>
-
-    </div>
-  );
+export default async function AdminPage() {
+  const items = await getMediaItems();
+  return <AdminClient items={items} />;
 }
