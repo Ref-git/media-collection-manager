@@ -1,21 +1,28 @@
 import { getMediaItems } from "@/lib/data";
-import MediaCard from "@/components/MediaCard";
+import GalleryClient from "./GalleryClient";
 import styles from "./page.module.css";
 
 export default async function Home() {
   const items = await getMediaItems();
+  const audioCount = items.filter((i) => i.mediaType === "Audio").length;
+  const videoCount = items.filter((i) => i.mediaType === "Video").length;
+  const gameCount = items.filter((i) => i.mediaType === "Game").length;
 
   return (
     <main className={styles.main}>
       <header className={styles.header}>
         <h1 className={styles.heading}>Media Collection</h1>
-        <p className={styles.count}>{items.length} items</p>
+        <p className={styles.subtitle}>
+          {items.length} {items.length === 1 ? "item" : "items"}
+          {items.length > 0 && (
+            <>
+              {" · "}
+              {audioCount} audio · {videoCount} video · {gameCount} game
+            </>
+          )}
+        </p>
       </header>
-      <section className={styles.grid}>
-        {items.map((item) => (
-          <MediaCard key={item._id} item={item} />
-        ))}
-      </section>
+      <GalleryClient items={items} />
     </main>
   );
 }

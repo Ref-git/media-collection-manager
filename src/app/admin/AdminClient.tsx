@@ -34,9 +34,9 @@ export default function AdminClient({ items }: { items: MediaItem[] }) {
   return (
     <div className={styles.page}>
       <header className={styles.pageHeader}>
-        <div>
-          <h1 className={styles.pageTitle}>Admin — Media Collection</h1>
-          <p className={styles.pageSubtitle}>{items.length} items</p>
+        <div className={styles.pageTitleGroup}>
+          <h1 className={styles.pageTitle}>Admin · Media Collection</h1>
+          <p className={styles.pageSubtitle}>{items.length} {items.length === 1 ? "item" : "items"}</p>
         </div>
         <div className={styles.headerActions}>
           <button className={styles.btnPrimary} onClick={openNew}>
@@ -70,7 +70,7 @@ export default function AdminClient({ items }: { items: MediaItem[] }) {
             {items.length === 0 && (
               <tr>
                 <td colSpan={6} className={styles.emptyRow}>
-                  No items yet. Create one above.
+                  Nothing on the shelf yet.
                 </td>
               </tr>
             )}
@@ -78,7 +78,7 @@ export default function AdminClient({ items }: { items: MediaItem[] }) {
               <tr key={item._id} className={editingItem?._id === item._id ? styles.rowEditing : ""}>
                 <td className={styles.cellTitle}>{item.title}</td>
                 <td>{item.publisher}</td>
-                <td>{item.releaseYear ?? "—"}</td>
+                <td className={styles.cellYear}>{item.releaseYear ?? "—"}</td>
                 <td>
                   <span className={`${styles.badge} ${TYPE_BADGE[item.mediaType]}`}>
                     {item.mediaType}
