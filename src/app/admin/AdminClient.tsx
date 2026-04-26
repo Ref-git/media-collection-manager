@@ -39,9 +39,6 @@ export default function AdminClient({ items }: { items: MediaItem[] }) {
           <p className={styles.pageSubtitle}>{items.length} items</p>
         </div>
         <div className={styles.headerActions}>
-          <a href="/" className={styles.btnLink}>
-            ← View Collection
-          </a>
           <button className={styles.btnPrimary} onClick={openNew}>
             + New Item
           </button>

@@ -1,0 +1,81 @@
+.banner {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 52px;
+  background: var(--background);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.segment {
+  padding: 0.3rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.12s;
+  white-space: nowrap;
+}
+
+.segment:hover {
+  color: #374151;
+}
+
+.segmentActive {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.segmentActive:hover {
+  color: #111827;
+}
+
+@media (prefers-color-scheme: dark) {
+  .banner {
+    border-bottom-color: #1f2937;
+  }
+
+  .toggle {
+    background: #1f2937;
+  }
+
+  .segment {
+    color: #6b7280;
+  }
+
+  .segment:hover {
+    color: #9ca3af;
+  }
+
+  .segmentActive {
+    background: #374151;
+    color: #f9fafb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .segmentActive:hover {
+    color: #f9fafb;
+  }
+}
