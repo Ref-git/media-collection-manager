@@ -133,12 +133,16 @@ export default function MediaForm({
           <div className={styles.field}>
             <label htmlFor="platform">Platform *</label>
             {mediaType === "Audio" && (
-              <input id="platform" type="text" value="CD" disabled />
+              <select id="platform" {...register("platform")}>
+                <option value="CD">CD</option>
+                <option value="Digital">Digital</option>
+              </select>
             )}
             {mediaType === "Video" && (
               <select id="platform" {...register("platform")}>
                 <option value="DVD">DVD</option>
                 <option value="BluRay">Blu-ray</option>
+                <option value="Digital">Digital</option>
               </select>
             )}
             {mediaType === "Game" && (

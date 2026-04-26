@@ -1,5 +1,5 @@
-export type AudioPlatform = "CD";
-export type VideoPlatform = "DVD" | "BluRay";
+export type AudioPlatform = "CD" | "Digital";
+export type VideoPlatform = "DVD" | "BluRay" | "Digital";
 
 export type AudioItem = {
   _id: string;
