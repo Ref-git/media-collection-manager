@@ -141,7 +141,8 @@ export default function MediaForm({
             {mediaType === "Video" && (
               <select id="platform" {...register("platform")}>
                 <option value="DVD">DVD</option>
-                <option value="BluRay">Blu-ray</option>
+                <option value="Blu-Ray">Blu-Ray</option>
+                <option value="Blu-Ray 4K">Blu-Ray 4K</option>
                 <option value="Digital">Digital</option>
               </select>
             )}
