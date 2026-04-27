@@ -70,6 +70,52 @@ export default function AdminClient({
         />
       )}
 
+      <div className={styles.mobileList}>
+        {items.length === 0 && (
+          <p className={styles.emptyRow}>Nothing on the shelf yet.</p>
+        )}
+        {items.map((item) => (
+          <div
+            key={item._id}
+            className={`${styles.mobileCard} ${
+              editingItem?._id === item._id ? styles.mobileCardEditing : ""
+            }`}
+          >
+            <span className={`${styles.badge} ${TYPE_BADGE[item.mediaType]}`}>
+              {item.mediaType}
+            </span>
+            <p className={styles.mobileCardTitle}>{item.title}</p>
+            <p className={styles.mobileCardPublisher}>{item.publisher}</p>
+            <div className={styles.mobileCardMeta}>
+              <span className={styles.mobileCardPlatform}>{item.platform}</span>
+              {item.releaseYear && (
+                <span className={styles.mobileCardYear}>{item.releaseYear}</span>
+              )}
+            </div>
+            <div className={styles.mobileCardActions}>
+              <button
+                className={styles.btnEdit}
+                onClick={() => openEdit(item)}
+              >
+                Edit
+              </button>
+              <form
+                action={deleteItemAction}
+                onSubmit={(e) => {
+                  if (!confirm(`Delete "${item.title}"?`)) e.preventDefault();
+                }}
+                style={{ display: "inline" }}
+              >
+                <input type="hidden" name="id" value={item._id} />
+                <button type="submit" className={styles.btnDelete}>
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
           <thead>
