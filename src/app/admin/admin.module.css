@@ -303,6 +303,53 @@
   font-family: var(--font-body);
 }
 
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .page {
+    padding: var(--s-5) var(--s-4) var(--s-6);
+  }
+
+  .pageTitle {
+    font-size: 1.375rem;
+  }
+
+  .pageHeader {
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+  }
+
+  .headerActions {
+    width: 100%;
+  }
+
+  .headerActions button,
+  .headerActions form {
+    flex: 1;
+  }
+
+  .headerActions form button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .formPanel {
+    padding: var(--s-4);
+  }
+
+  .field {
+    min-width: 0;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
+
+  .formActions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ── Badges ── */
 .badge {
   display: inline-flex;
