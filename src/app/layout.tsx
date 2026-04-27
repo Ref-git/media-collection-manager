@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { EB_Garamond, Public_Sans, JetBrains_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import ModeBanner from "@/components/ModeBanner";
+import { decrypt } from "@/lib/session";
 import "./globals.css";
 
 const ebGaramond = EB_Garamond({
@@ -27,18 +29,22 @@ export const metadata: Metadata = {
   description: "Your personal media collection manager",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const session = await decrypt(cookieStore.get("session")?.value);
+  const userEmail = session?.email;
+
   return (
     <html
       lang="en"
       className={`${ebGaramond.variable} ${publicSans.variable} ${jetbrainsMono.variable}`}
     >
       <body>
-        <ModeBanner />
+        <ModeBanner userEmail={userEmail} />
         {children}
       </body>
     </html>

@@ -1,15 +1,23 @@
 "use server";
 
-import { createMediaItem, updateMediaItem, deleteMediaItem } from "@/lib/data";
+import {
+  createMediaItem,
+  updateMediaItem,
+  deleteMediaItem,
+  claimUnownedItems,
+} from "@/lib/data";
+import { verifySession } from "@/lib/dal";
 import { revalidatePath } from "next/cache";
 import type { MediaItem } from "@/lib/types";
 
 export type FormState = { error?: string; success?: boolean };
 
 export async function saveItemAction(
-  prevState: FormState,
+  _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
+  const { userId } = await verifySession();
+
   const id = formData.get("id") as string | null;
   const title = (formData.get("title") as string)?.trim();
   const publisher = (formData.get("publisher") as string)?.trim();
@@ -37,10 +45,10 @@ export async function saveItemAction(
 
   try {
     if (id) {
-      const updated = await updateMediaItem(id, data);
-      if (!updated) return { error: "Item not found." };
+      const updated = await updateMediaItem(id, data, userId);
+      if (!updated) return { error: "Item not found or not owned by you." };
     } else {
-      await createMediaItem(data);
+      await createMediaItem(data, userId);
     }
     revalidatePath("/admin");
     revalidatePath("/");
@@ -51,9 +59,17 @@ export async function saveItemAction(
 }
 
 export async function deleteItemAction(formData: FormData) {
+  const { userId } = await verifySession();
   const id = formData.get("id") as string;
   if (!id) return;
-  await deleteMediaItem(id);
+  await deleteMediaItem(id, userId);
+  revalidatePath("/admin");
+  revalidatePath("/");
+}
+
+export async function claimItemsAction(): Promise<void> {
+  const { userId } = await verifySession();
+  await claimUnownedItems(userId);
   revalidatePath("/admin");
   revalidatePath("/");
 }
