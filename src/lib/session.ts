@@ -7,17 +7,18 @@ export type SessionPayload = {
   expiresAt: Date;
 };
 
-if (!process.env.SESSION_SECRET) {
-  throw new Error('Missing environment variable: "SESSION_SECRET"');
+function getEncodedKey(): Uint8Array {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) throw new Error('Missing environment variable: "SESSION_SECRET"');
+  return new TextEncoder().encode(secret);
 }
-const encodedKey = new TextEncoder().encode(process.env.SESSION_SECRET);
 
 export async function encrypt(payload: SessionPayload): Promise<string> {
   return new SignJWT({ userId: payload.userId, email: payload.email })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("7d")
-    .sign(encodedKey);
+    .sign(getEncodedKey());
 }
 
 export async function decrypt(
@@ -25,7 +26,7 @@ export async function decrypt(
 ): Promise<SessionPayload | null> {
   if (!session) return null;
   try {
-    const { payload } = await jwtVerify(session, encodedKey, {
+    const { payload } = await jwtVerify(session, getEncodedKey(), {
       algorithms: ["HS256"],
     });
     return payload as unknown as SessionPayload;
