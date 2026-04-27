@@ -20,7 +20,7 @@ export default function ModeBanner({ userEmail }: { userEmail?: string }) {
           aria-hidden
           className={styles.brandMark}
         />
-        <span className={styles.brandName}>Shelf</span>
+        <span className={styles.brandName}>Media Shelf</span>
       </Link>
 
       {userEmail ? (

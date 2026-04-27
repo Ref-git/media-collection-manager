@@ -11,7 +11,7 @@ export default function LoginPage() {
   return (
     <main className={styles.page}>
       <div className={styles.card}>
-        <h1 className={styles.title}>Sign in to Shelf</h1>
+        <h1 className={styles.title}>Sign in to Media Shelf</h1>
 
         <form action={action} className={styles.form}>
           {state?.error && (
