@@ -39,7 +39,7 @@ export async function loginAction(
   if (!user) return { error: "Invalid email or password." };
 
   await createSession(user.id, user.email);
-  redirect("/admin");
+  redirect("/");
 }
 
 export async function logoutAction(): Promise<void> {
