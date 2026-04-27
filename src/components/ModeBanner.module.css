@@ -121,3 +121,22 @@
   color: var(--fg-1);
   border-color: var(--ink-2);
 }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .banner {
+    padding: 0 var(--s-3);
+  }
+
+  .brandName {
+    font-size: 1.0625rem;
+  }
+
+  .segment {
+    padding: 6px 10px;
+  }
+
+  .userEmail {
+    display: none;
+  }
+}
