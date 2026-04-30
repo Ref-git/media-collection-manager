@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Media Shelf — Media Collection",
+  title: "Media Shelf",
   description: "Your personal media collection manager",
 };
 
