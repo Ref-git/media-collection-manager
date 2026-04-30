@@ -4,7 +4,7 @@ import dbClient from "./mongodb";
 
 type UserDoc = {
   email: string;
-  passwordHash: string;
+  passwordHash: string | null;
   createdAt: Date;
 };
 
@@ -32,7 +32,7 @@ export async function verifyCredentials(
   const user: WithId<UserDoc> | null = await col().findOne({
     email: email.toLowerCase().trim(),
   });
-  if (!user) return null;
+  if (!user || !user.passwordHash) return null;
   const valid = await bcrypt.compare(password, user.passwordHash);
   if (!valid) return null;
   return { id: user._id.toString(), email: user.email };
@@ -57,4 +57,18 @@ export async function getUserById(
   } catch {
     return null;
   }
+}
+
+export async function upsertGoogleUser(
+  email: string
+): Promise<string> {
+  const normalised = email.toLowerCase().trim();
+  const existing = await col().findOne({ email: normalised });
+  if (existing) return existing._id.toString();
+  const result = await col().insertOne({
+    email: normalised,
+    passwordHash: null,
+    createdAt: new Date(),
+  });
+  return result.insertedId.toString();
 }

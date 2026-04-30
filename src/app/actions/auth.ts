@@ -1,8 +1,9 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { createUser, verifyCredentials, emailExists } from "@/lib/auth";
+import { createUser, verifyCredentials, emailExists, upsertGoogleUser } from "@/lib/auth";
 import { createSession, deleteSession } from "@/lib/session";
+import { verifyFirebaseToken } from "@/lib/verify-firebase-token";
 
 export type AuthState = { error?: string } | undefined;
 
@@ -45,4 +46,15 @@ export async function loginAction(
 export async function logoutAction(): Promise<void> {
   await deleteSession();
   redirect("/login");
+}
+
+export async function googleAuthAction(
+  idToken: string
+): Promise<{ error: string }> {
+  const verified = await verifyFirebaseToken(idToken);
+  if (!verified) return { error: "Google sign-in failed. Please try again." };
+
+  const userId = await upsertGoogleUser(verified.email);
+  await createSession(userId, verified.email);
+  redirect("/");
 }

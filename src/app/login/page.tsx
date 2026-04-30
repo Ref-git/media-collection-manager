@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { loginAction } from "@/app/actions/auth";
+import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import styles from "./auth.module.css";
 
 export default function LoginPage() {
@@ -50,6 +51,8 @@ export default function LoginPage() {
             {pending ? "Signing in…" : "Sign in"}
           </button>
         </form>
+
+        <GoogleSignInButton />
 
         <p className={styles.switchLink}>
           No account?{" "}
