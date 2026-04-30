@@ -1,5 +1,5 @@
 .page {
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - var(--banner-h));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,21 +9,23 @@
 .card {
   width: 100%;
   max-width: 380px;
-  background: var(--color-surface, #fff);
-  border: 1px solid var(--color-border, #e2e8f0);
-  border-radius: 10px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-2);
   padding: 2rem;
+  box-shadow: var(--shadow-2);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
 .title {
-  font-family: var(--font-eb-garamond), Georgia, serif;
+  font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 600;
   margin: 0;
   text-align: center;
+  color: var(--fg-1);
 }
 
 .form {
@@ -38,39 +40,40 @@
   gap: 0.3rem;
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--color-text-muted, #64748b);
+  color: var(--fg-2);
 }
 
 .input {
   font-family: inherit;
   font-size: 0.95rem;
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-border, #e2e8f0);
-  border-radius: 6px;
-  background: transparent;
-  color: inherit;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-1);
+  background: var(--paper);
+  color: var(--fg-1);
   width: 100%;
   box-sizing: border-box;
-  transition: border-color 0.15s;
+  transition: border-color var(--dur-fast);
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--color-accent, #6366f1);
+  border-color: var(--ember);
+  box-shadow: var(--shadow-focus);
 }
 
 .btnPrimary {
   margin-top: 0.25rem;
   padding: 0.6rem 1rem;
   border: none;
-  border-radius: 6px;
-  background: var(--color-accent, #6366f1);
+  border-radius: var(--r-1);
+  background: var(--ember);
   color: #fff;
   font-family: inherit;
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: opacity var(--dur-fast);
 }
 
 .btnPrimary:disabled {
@@ -84,10 +87,10 @@
 
 .error {
   font-size: 0.875rem;
-  color: var(--color-error, #dc2626);
-  background: var(--color-error-bg, #fef2f2);
-  border: 1px solid var(--color-error-border, #fecaca);
-  border-radius: 6px;
+  color: var(--danger);
+  background: var(--danger-tint);
+  border: 1px solid var(--danger);
+  border-radius: var(--r-1);
   padding: 0.5rem 0.75rem;
   margin: 0;
 }
@@ -95,12 +98,12 @@
 .switchLink {
   font-size: 0.875rem;
   text-align: center;
-  color: var(--color-text-muted, #64748b);
+  color: var(--fg-3);
   margin: 0;
 }
 
 .switchLink a {
-  color: var(--color-accent, #6366f1);
+  color: var(--ember);
   text-decoration: none;
 }
 
@@ -118,7 +121,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--color-text-muted, #94a3b8);
+  color: var(--fg-3);
   font-size: 0.8rem;
 }
 
@@ -127,7 +130,7 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--color-border, #e2e8f0);
+  background: var(--rule);
 }
 
 .btnGoogle {
@@ -136,21 +139,21 @@
   justify-content: center;
   gap: 0.6rem;
   padding: 0.6rem 1rem;
-  border: 1px solid var(--color-border, #e2e8f0);
-  border-radius: 6px;
-  background: transparent;
-  color: inherit;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-1);
+  background: var(--paper);
+  color: var(--fg-1);
   font-family: inherit;
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
   width: 100%;
 }
 
 .btnGoogle:hover:not(:disabled) {
-  background: var(--color-surface-hover, #f8fafc);
-  border-color: #94a3b8;
+  background: var(--paper-3);
+  border-color: var(--rule-strong);
 }
 
 .btnGoogle:disabled {
